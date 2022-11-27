@@ -46,6 +46,8 @@
                         @enderror
                     </div>
                 </div>
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                {{-- {{ dump(Auth::user()->id) }} --}}
                 <button type="submit" class="btn btn-primary ml-3">Submit</button>
             </div>
         </form>

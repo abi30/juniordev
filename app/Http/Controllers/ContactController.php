@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -49,11 +50,14 @@ class ContactController extends Controller
             'name' => 'required',
             'email' => 'required',
             'address' => 'required',
+            'user_id' => 'required',
         ]);
-        
+    // $request->user_id = Auth::user()->id;
+
+            // dd($request);
         Contact::create($request->post());
 
-        return redirect()->route('contacts.index')->with('success','Company has been created successfully.');
+        return redirect()->route('contacts.index')->with('success','Contact has been created successfully.');
     }
     /**
      * Display the specified resource.
@@ -61,7 +65,7 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-     public function show(Contact $company)
+     public function show(Contact $contact)
     {
         return view('contacts.show',compact('contact'));
     }
@@ -108,7 +112,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->delete();
-return redirect()->route( 'contacts.index' )->with( 'success', 'Company has been deleted successfully' );
+return redirect()->route( 'contacts.index' )->with( 'success', 'contact has been deleted successfully' );
 
     }
 }
